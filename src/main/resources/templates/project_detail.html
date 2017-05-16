@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+    <head th:replace="layout :: head(detail)"></head>
+    <body>
+        <header th:replace="layout :: header"></header>
+        <nav th:replace="layout :: nav(projects)"></nav>
+        <section>
+            <div class="container wrapper">
+                <div class="project-list single">
+                    <div class="project">
+                        <h2>Website Project</h2>
+                        <p>Design and build a custom website</p>
+                        <span class="tag active">Active</span>
+                    </div>
+                    <div class="roles-collaborators">
+                        <h3>Roles &amp; Collaborators</h3>
+                        <div th:each="entry:${roles}">
+                            <div class="list-item">
+                                <span class="primary" th:text="${entry.key}">Developer</span>
+                                <span class="secondary" th:text="${entry.value}">Michael Pemulis</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <a class="button" th:href="@{|/editproject/${projectid}|}">Edit Project</a>
+                        <a class="button" th:href="@{|/project_collaborators/${projectid}|}">Edit Collaborators</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
