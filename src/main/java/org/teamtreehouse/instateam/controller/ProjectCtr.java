@@ -75,8 +75,8 @@ public class ProjectCtr {
         return "edit_project";
     }
 
-    @RequestMapping(value ="/editproject/{id}", method = RequestMethod.POST)
-    public String editProject(Project project, Model model) {
+    @RequestMapping(value ="/editproject", method = RequestMethod.POST)
+    public String editProject(Project project) {
 
         service.save(project);
         return "redirect:/";
