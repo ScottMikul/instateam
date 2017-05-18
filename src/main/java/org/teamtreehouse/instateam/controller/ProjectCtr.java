@@ -17,9 +17,7 @@ import org.teamtreehouse.instateam.service.ProjectService;
 import org.teamtreehouse.instateam.service.RoleService;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by scott on 5/11/2017.
@@ -69,9 +67,25 @@ public class ProjectCtr {
     }
 
     @RequestMapping(value ="/editproject/{id}", method = RequestMethod.POST)
-    public String editProject( Project project, Model model){
+    public String editProject(Project project, Model model) {
+
         service.save(project);
         return "redirect:/";
+    }
+
+    @RequestMapping("/testing")
+    public String quickCheckBoxTest(Model model){
+        Project project = service.findById(1);
+        model.addAttribute("project",project);
+        return "/testcheckbox";
+    }
+
+    @RequestMapping(value ="/testing", method = RequestMethod.POST)
+    public String resolveCheckBoxTest(Project project){
+        for(Role r : project.getRolesNeeded()){
+            System.out.println(r.getName());
+        }
+        return "/";
     }
 
 }

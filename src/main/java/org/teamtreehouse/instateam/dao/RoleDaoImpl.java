@@ -40,7 +40,7 @@ public class RoleDaoImpl implements RoleDao{
     public void save(Role role) {
         Session session = factory.openSession();
         session.beginTransaction();
-        session.save(role);
+        session.saveOrUpdate(role);
         session.getTransaction().commit();
         session.close();
 
