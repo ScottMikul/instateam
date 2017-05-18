@@ -62,7 +62,16 @@ public class ProjectCtr {
         List<Role> roles = rService.findAll();
         model.addAttribute("project",project);
         model.addAttribute("allroles",roles);
+        model.addAttribute("action","edit");
 
+        return "edit_project";
+    }
+
+    @RequestMapping("/newproject")
+    public String addProjectPage(Model model){
+        List<Role> roles = rService.findAll();
+        model.addAttribute("allroles",roles);
+        model.addAttribute("action","add");
         return "edit_project";
     }
 
@@ -87,5 +96,7 @@ public class ProjectCtr {
         }
         return "/";
     }
+
+
 
 }
