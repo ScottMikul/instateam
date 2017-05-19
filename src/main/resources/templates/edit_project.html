@@ -6,7 +6,7 @@
         <nav th:replace="layout :: nav(projects)"></nav>
         <section>
             <div class="container wrapper">
-                <form th:action = "@{|/editproject/${id}|}" method = "post" th:object="${project}">
+                <form th:action = "@{/editproject}" method = "post" th:object="${project}">
                     <div>
                         <label for="id" > id:</label>
                         <input type="text" th:field="*{id}" />
@@ -35,7 +35,7 @@
                         <label for="project_roles">Project Roles:</label>
                         <ul class="checkbox-list" >
                             <li th:each="role,status: ${allroles}">
-                                <input type="checkbox" th:field="*{RolesNeeded[__${status.index}__].id}" th:value="${role.id}" />
+                                <input type="checkbox" th:field="*{rolesneeded[__${status.index}__].id}" th:value="${role.id}" />
                                 <span class="primary" th:text="${role.name}"> Developer</span>
                             </li>
                         </ul>

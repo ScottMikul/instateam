@@ -2,6 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout:: head(Project)"></head>
 <body>
-    ERROR PAGE LOL
+    <div th:text="${error}"></div>
 </body>
 </html>

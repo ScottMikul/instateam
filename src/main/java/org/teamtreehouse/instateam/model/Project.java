@@ -15,7 +15,7 @@ public class Project {
     String description;
     String status;
     @ManyToMany
-    List<Role> RolesNeeded;
+    List<Role> rolesneeded;
     @ManyToMany
     List<Collaborator> collaborators;
 
@@ -27,15 +27,15 @@ public class Project {
         this.name = builder.name;
         this.status = builder.status;
         this.description = builder.description;
-        this.RolesNeeded = builder.RolesNeeded;
+        this.rolesneeded = builder.RolesNeeded;
     }
 
-    public Project(int id, String name, String description, String status, List<Role> rolesNeeded, List<Collaborator> collaborators) {
+    public Project(int id, String name, String description, String status, List<Role> rolesneeded, List<Collaborator> collaborators) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.status = status;
-        RolesNeeded = rolesNeeded;
+        this.rolesneeded = rolesneeded;
         this.collaborators = collaborators;
     }
 
@@ -79,12 +79,12 @@ public class Project {
         this.status = status;
     }
 
-    public List<Role> getRolesNeeded() {
-        return RolesNeeded;
+    public List<Role> getRolesneeded() {
+        return rolesneeded;
     }
 
-    public void setRolesNeeded(List<Role> rolesNeeded) {
-        RolesNeeded = rolesNeeded;
+    public void setRolesneeded(List<Role> rolesneeded) {
+        this.rolesneeded = rolesneeded;
     }
 
     public static class ProjectBuilder{
