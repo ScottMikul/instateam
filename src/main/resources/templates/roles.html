@@ -6,19 +6,29 @@
 <nav th:replace="layout :: nav(roles)"></nav>
         <section>
             <div class="container wrapper">
-                <form method ="post" th:action="@{/addrole}">
+                <form method ="post" th:action="@{/manageroles}" th:object="${rolelist}">
                     <h2>Manage Roles</h2>
                     <div>
                         <ul class="checkbox-list">
-                            <li th:each="role:${roles}">
-                                <span class="primary" th:text="${role.name}">Developer</span>
+
+                            <li th:each="role, stat:*{roles}" th:if="${stat.index}!=0">
+
+                                <div class="error-message" th:if="${#fields.hasErrors('*{roles[__${stat.index}__].name}')}"
+                                     th:errors="*{roles[__${stat.index}__].name}"></div>
+                                <input type="text" class="primary" th:field="*{roles[__${stat.index}__].name}"/>
+                                <input type="hidden" th:field="*{roles[__${stat.index}__].id}"/>
                             </li>
                         </ul>
                     </div>
+                    <input type="submit" class="button" value="save"/>
+                </form>
+                <form th:action="@{/addrole}" method="post" th:object="${role}">
+                    <input type="hidden" th:field="*{id}"/>
                     <div class="actions add-new-role">
-                            <input name="name" type="text" placeholder="New Role..." />
-                            <input type="submit" class="button" ></input>
-
+                        <div class="error-message" th:if="${#fields.hasErrors('name')}"
+                             th:errors="*{name}"></div>
+                            <input th:field="*{name}" type="text" placeholder="New Role..." />
+                            <input type="submit" value="add"/>
                     </div>
                 </form>
             </div>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+<table class="table table-bordered table-hover table-striped">
+    <div th:text = "${project.id}"></div>
+    <div th:text = "${project.name}"></div>
+    <div th:text = "${project.description}"></div>
+    <div th:text = "${project.status}"></div>
+    <tbody>
+
+    <tr th:each="collab, stat: ${project.collaborators}">
+        <td th:text="${collab.id}"></td>
+        <td th:text="${collab.name}"></td>
+        <td th:text="${collab.role.name}"></td>
+
+    </tr>
+
+    <tr th:each="role, stat: ${project.rolesneeded}">
+        <td th:text="${role.id}"></td>
+        <td th:text="${role.name}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

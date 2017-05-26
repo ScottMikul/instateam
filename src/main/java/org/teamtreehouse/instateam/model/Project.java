@@ -1,6 +1,8 @@
 package org.teamtreehouse.instateam.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
@@ -11,15 +13,22 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
+
+    @NotNull
+    @Size(min = 3, max = 20)
     String name;
+
+    @NotNull
+    @Size(min = 3, max = 1024)
     String description;
+
     String status;
     @ManyToMany
     List<Role> rolesneeded;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     List<Collaborator> collaborators;
 
-    Project(){}
+    public Project(){}
 
     Project(ProjectBuilder builder){
         this.id = builder.id;

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+<form method="post" action="/resolveCheckBoxForm" th:object="${project}">
+    <table >
+        <tr th:each="role, stat : ${allroles}">
+            <td>
+                <input type="checkbox" th:field="*{rolesneeded[__${stat.index}__].id}" th:value="${role.id}"/>
+                <input type="hidden" th:field="*{rolesneeded[__${stat.index}__].name}" />
+            </td>
+            <td th:text="${role.name}"></td>
+        </tr>
+    </table>
+    <button type="submit" value="submit" class="btn btn-success">Submit</button>
+</form>
+</body>
+</html>

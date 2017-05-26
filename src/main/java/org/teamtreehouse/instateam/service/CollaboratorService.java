@@ -13,5 +13,7 @@ public interface CollaboratorService {
     Collaborator findById(int id);
     List<Collaborator> findAll();
     void save(Collaborator collaborator);
+    void saveAll(List<Collaborator> collab);
     void delete(int id);
+
 }

@@ -16,6 +16,7 @@ import java.util.List;
 public class CollaboratorServiceImpl implements CollaboratorService{
     @Autowired
     CollaboratorDao dao;
+
     @Override
     public Collaborator findById(int id) {
         return dao.findById(id);
@@ -32,7 +33,14 @@ public class CollaboratorServiceImpl implements CollaboratorService{
     }
 
     @Override
+    public void saveAll(List<Collaborator> collab) {
+        dao.saveAll(collab);
+    }
+
+    @Override
     public void delete(int id) {
         dao.delete(id);
     }
+
+
 }

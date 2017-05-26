@@ -1,6 +1,8 @@
 package org.teamtreehouse.instateam.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by scott on 5/11/2017.
@@ -10,6 +12,8 @@ public class Collaborator {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
+    @NotNull
+    @Size(min=1, max=20)
     String name;
     @ManyToOne
     Role role;

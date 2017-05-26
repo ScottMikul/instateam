@@ -1,54 +1,47 @@
 <!DOCTYPE html>
 <html>
-<head th:replace ="layout:: head(project collaborators)"></head>
+<head th:replace ="layout:: head(projectcollaborators)"></head>
 <body>
 <header th:replace="layout::header"></header>
 <nav th:replace="layout::nav(collaborators)"></nav>
         <section>
             <div class="container wrapper">
-                <form>
+                <form method="post" action="/project_collaborators" th:object="${wrapper}">
                     <label>Edit Collaborators: Website Project</label>
                     <ul class="checkbox-list">
-                        <li><span class="primary">Developer</span>
+                        <li th:each="collab, stat: *{collabs}">
+                            <input th:field="*{collabs[__${stat.index}__].id}" type="hidden" />
+                            <input th:field="*{collabs[__${stat.index}__].name}" type="hidden" />
+
+                            <div th:text="${collab.name}">colaaaab</div>
+                        <span class="primary" th:text="${collab.role.name}">Developer</span>
                             <div class="custom-select">
                                 <span class="dropdown-arrow"></span>
-                                <select>
-                                    <option value="#">Michael Pemulis</option>
-                                    <option value="#">Name</option>
-                                </select>
-                            </div>
-                        </li>
-                        <li><span class="primary">Designer</span>
-                            <div class="custom-select">
-                                <span class="dropdown-arrow"></span>
-                                <select>
-                                    <option value="#">Don Gately</option>
-                                    <option value="#">Name</option>
-                                </select>
-                            </div>
-                        </li>
-                        <li><span class="primary">QA</span>
-                            <div class="custom-select">
-                                <span class="dropdown-arrow"></span>
-                                <select>
-                                    <option value="#">Joelle Van Dyne</option>
-                                    <option value="#">Name</option>
-                                </select>
-                            </div>
-                        </li>
-                        <li><span class="primary">DevOps</span>
-                            <div class="custom-select">
-                                <span class="dropdown-arrow"></span>
-                                <select>
-                                    <option value="#">Choose...</option>
-                                    <option value="#">Name</option>
+                                <select th:field="*{collabs[__${stat.index}__].role.id}" >
+                                    <option th:each="role:${allroles}" th:value="${role.id}"
+                                            th:text="${role.name}">Role...
+                                    </option>
                                 </select>
                             </div>
                         </li>
                     </ul>
                     <div class="actions">
-                        <input type="submit" value="Save" class="button">
+                        <input type="submit" value="Save" class="button"/>
                         <a href="#" class="button button-secondary">Cancel</a>
+                    </div>
+                </form>
+                <form th:action="@{|/addProjectCollab/${id}|}" method="post" >
+                    <div class="actions add-new-role">
+
+                        <div class="custom-select">
+                            <span class="dropdown-arrow"></span>
+                            <select name="id" >
+                                <option th:each="col:${allcollabs}" th:value="${col.id}"
+                                        th:text="|${col.name} - ${col.role.name}|">Collaborator name - role
+                                </option>
+                            </select>
+                        </div>
+                        <input type="submit"  value="add"/>
                     </div>
                 </form>
             </div>

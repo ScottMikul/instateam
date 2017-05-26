@@ -1,6 +1,7 @@
 package org.teamtreehouse.instateam.dao;
 
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class CollaboratorDaoImpl implements CollaboratorDao {
         Session session = factory.openSession();
         session.beginTransaction();
         List <Collaborator> res = session.createCriteria(Collaborator.class).list();
+        for(Collaborator collab: res){
+            Hibernate.initialize(collab);
+        }
         session.close();
         return res;
     }
@@ -38,7 +42,16 @@ public class CollaboratorDaoImpl implements CollaboratorDao {
     public void save(Collaborator collaborator) {
         Session session = factory.openSession();
         session.beginTransaction();
-        session.save(collaborator);
+        session.saveOrUpdate(collaborator);
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    @Override
+    public void saveAll(List<Collaborator> collaborator) {
+        Session session = factory.openSession();
+        session.beginTransaction();
+        for(Collaborator c: collaborator) session.saveOrUpdate(c);
         session.getTransaction().commit();
         session.close();
     }
