@@ -65,9 +65,9 @@ public class RoleCtr {
         }
 
         for(Role role: wrapper.getRoles()){
-
-            service.save(role);
-
+            if (role.getId() != 1) {
+                service.save(role);
+            }
         }
         return "redirect:/roles";
     }

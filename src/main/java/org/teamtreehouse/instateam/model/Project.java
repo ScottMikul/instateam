@@ -23,7 +23,8 @@ public class Project {
     String description;
 
     String status;
-    @ManyToMany
+
+    @ManyToMany(cascade =CascadeType.ALL)
     List<Role> rolesneeded;
     @ManyToMany(cascade = CascadeType.ALL)
     List<Collaborator> collaborators;

@@ -15,7 +15,7 @@ public class Collaborator {
     @NotNull
     @Size(min=1, max=20)
     String name;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     Role role;
 
     public Collaborator(){}

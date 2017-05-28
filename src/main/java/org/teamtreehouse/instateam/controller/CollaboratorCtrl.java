@@ -53,6 +53,8 @@ public class CollaboratorCtrl {
             redirectAttributes.addFlashAttribute("collab",collaborator);
             return "redirect:/collaborators";
         }
+        Role role = rService.findById(collaborator.getRole().getId());
+        collaborator.setRole(role);
         service.save(collaborator);
         return "redirect:/collaborators";
     }

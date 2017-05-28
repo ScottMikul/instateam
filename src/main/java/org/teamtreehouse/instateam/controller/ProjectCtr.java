@@ -41,13 +41,11 @@ public class ProjectCtr {
 
        HashMap<String,String> map = new HashMap<>();
         for(Role r1:project.getRolesneeded()){
+            map.put(r1.getName(),"[Unassigned]");
             for(Collaborator c1: project.getCollaborators()){
                 if(r1.getId()==c1.getRole().getId()){
                     map.put(r1.getName(),c1.getName());
                     break;
-                }
-                else{
-                    map.put(r1.getName(),"[Unassigned]");
                 }
             }
         }
@@ -65,7 +63,7 @@ public class ProjectCtr {
             List<Role> projectroles = project.getRolesneeded();
             int counter = 0;
             for (Role r : roles) {
-                if (projectroles.get(counter) == null || counter == projectroles.size() || projectroles.get(counter).getId() != r.getId()) {
+                if (counter == projectroles.size()|| projectroles.get(counter) == null  || projectroles.get(counter).getId() != r.getId()) {
                     projectroles.add(counter, new Role());
                 }
                 counter++;
@@ -103,8 +101,9 @@ public class ProjectCtr {
         List<Role> rolesNeeded = new ArrayList<>();
         int counter =0;
         for(Role role: project.getRolesneeded()){
-            if (role.getId() != 0) {
-                rolesNeeded.add(role);
+            if (role.getId() != 1) {
+                Role r = rService.findById(role.getId());
+                rolesNeeded.add(r);
             }
         }
 

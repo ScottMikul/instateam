@@ -9,14 +9,24 @@
                 <form method ="post" th:action="@{/manageroles}" th:object="${rolelist}">
                     <h2>Manage Roles</h2>
                     <div>
+
+                    </div>
+                    <div>
                         <ul class="checkbox-list">
 
-                            <li th:each="role, stat:*{roles}" th:if="${stat.index}!=0">
+                            <li th:each="role, stat:*{roles}" >
+                                <div th:if="${stat.index}==0">
+                                    <input type="hidden" th:field="*{roles[__${stat.index}__].name}"/>
+                                    <input type="hidden" th:field="*{roles[__${stat.index}__].id}"/>
+                                </div>
+                                <div th:if="${stat.index}!=0">
+                                    <div class="error-message" th:if="${#fields.hasErrors('*{roles[__${stat.index}__].name}')}"
+                                         th:errors="*{roles[__${stat.index}__].name}"></div>
+                                    <input type="text" class="primary" th:field="*{roles[__${stat.index}__].name}"/>
+                                    <input type="hidden" th:field="*{roles[__${stat.index}__].id}"/>
 
-                                <div class="error-message" th:if="${#fields.hasErrors('*{roles[__${stat.index}__].name}')}"
-                                     th:errors="*{roles[__${stat.index}__].name}"></div>
-                                <input type="text" class="primary" th:field="*{roles[__${stat.index}__].name}"/>
-                                <input type="hidden" th:field="*{roles[__${stat.index}__].id}"/>
+                                </div>
+
                             </li>
                         </ul>
                     </div>
